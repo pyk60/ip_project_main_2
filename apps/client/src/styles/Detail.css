@@ -1,0 +1,294 @@
+body {
+  background-color: black;
+}
+
+.page-container {
+  background-color: #000;
+  color: #fff;
+  padding: 40px;
+}
+
+.detail-header {
+  font-size: 36px;
+  color: #1e90ff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.trailer-banner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 20px;
+  height: 450px;
+}
+
+.trailer-placeholder {
+  width: 100%;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.trailer-banner .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.trailer-banner .title-info h1 {
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.trailer-banner .title-info p {
+  color: white;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+/* OTT 플랫폼 */
+.ott-section {
+  padding: 40px;
+  border-radius: 8px;
+  color: #fff;
+}
+
+.ott-section h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.ott-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.ott-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  background: #2a2a2a;
+  border-radius: 8px;
+}
+
+.ott-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ott-info p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.ott-button {
+  background: #3a6cff;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.ott-button:hover {
+  background: #2a54cc;
+}
+
+/* 드라마 정보 */
+.toggle-info-section {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.toggle-info-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.toggle-info-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.toggle-info-button:hover {
+  color: #f39c12;
+}
+
+.drama-info {
+  margin-top: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.drama-info p {
+  line-height: 150%;
+}
+
+/* 출연진 섹션 */
+.drama-cast {
+  margin: 20px 0;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.drama-cast h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.cast-slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 10px;
+  scroll-behavior: smooth;
+}
+
+.cast-slider::-webkit-scrollbar {
+  height: 8px;
+}
+
+.cast-slider::-webkit-scrollbar-thumb {
+  background-color: #f1f1f1;
+  border-radius: 4px;
+}
+
+.cast-slider::-webkit-scrollbar-track {
+  background: #888;
+}
+
+.cast-card {
+  flex: 0 0 auto;
+  width: 120px;
+  text-align: center;
+}
+
+.cast-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  margin-bottom: 8px;
+  border-radius: 50%;
+}
+
+.cast-name {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.cast-character {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 리뷰 섹션 */
+.reviews-section {
+  margin-top: 30px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.reviews-section h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.review {
+  background-color: #333;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.review h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.add-review {
+  margin-top: 20px;
+}
+
+.add-review textarea {
+  width: 99%;
+  height: 100px;
+  margin-bottom: 10px;
+  margin: 0 auto; /* 가운데 정렬 */
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.add-review button {
+  display: block; /* 버튼을 블록 요소로 설정 */
+  margin: 10px; /* 상하 간격과 가운데 정렬 */
+  padding: 8px 16px; /* 내부 여백 */
+  background-color: #007bff; /* 버튼 배경색 */
+  color: white; /* 텍스트 색상 */
+  border: none; /* 테두리 제거 */
+  border-radius: 5px; /* 둥근 모서리 */
+  cursor: pointer;
+}
+
+.add-review .star-rating {
+  margin-bottom: 10px; /* 별점과 텍스트 입력 사이의 간격 추가 */
+}
+
+.highlights-section {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+
+/* 찜 버튼 관련 스타일 */
+.favorite-button {
+background: none;
+border: none;
+color: white;
+font-size: 1.5rem;
+cursor: pointer;
+transition: color 0.3s ease;
+}
+
+.favorite-button.active {
+color: white; /* 찜 상태일 때 흰색으로 변경 */
+}
+
+/* 찜 텍스트 스타일 */
+.favorite-text {
+margin-left: 8px;
+color: #fff;
+font-size: 1rem;
+}

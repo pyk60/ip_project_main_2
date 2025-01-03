@@ -1,0 +1,80 @@
+/* 로그인 페이지 스타일 */
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #000; /* 배경색 */
+  color: #fff; /* 텍스트 색 */
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  gap: 15px; /* 요소 간 간격 */
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 5px; /* 라벨과 입력 필드 사이 간격 */
+}
+
+input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 비밀번호 입력 컨테이너 */
+.password-container {
+position: relative; /* 상대적 위치 설정 */
+width: 100%; /* 전체 컨테이너의 너비를 입력 필드와 동일하게 설정 */
+}
+
+/* 비밀번호 입력 필드 */
+.password-container input {
+width: 100%; /* 입력 필드가 컨테이너 너비를 차지 */
+}
+
+/* SHOW 버튼 */
+.show-password-btn {
+position: absolute; /* 입력 필드 오른쪽에 배치 */
+top: 50%; /* 수직 가운데 정렬 */
+right: 10px; /* 오른쪽 간격 */
+transform: translateY(-50%); /* 수직 정렬 보정 */
+font-size: 12px;
+color: #999;
+background: none;
+border: none;
+cursor: pointer;
+padding: 0;
+}
+
+.auth-button {
+  background-color: #1e90ff; /* 버튼 배경색 */
+  color: #fff; /* 버튼 텍스트 색상 */
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.auth-links {
+  font-size: 12px;
+  color: #999; /* 텍스트 색상 */
+  text-align: center;
+}
+
+.auth-links u {
+  text-decoration: none; /* 밑줄 제거 */
+  color: #1e90ff; /* 회원가입 링크 색상 */
+  cursor: pointer;
+}
+
+

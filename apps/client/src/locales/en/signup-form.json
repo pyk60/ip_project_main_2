@@ -1,0 +1,15 @@
+{
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "signUp": "Sign Up",
+  "signingUp": "Signing up...",
+  "validation": {
+    "emailRequired": "Email is required.",
+    "emailInvalid": "Please enter a valid email address.",
+    "passwordRequired": "Password is required.",
+    "passwordLength": "Password must be at least 6 characters long.",
+    "confirmRequired": "Confirm Password is required.",
+    "passwordsMatch": "Passwords do not match."
+  }
+}

@@ -1,0 +1,100 @@
+/* 페이지 전체에 패딩 추가 */
+body {
+    padding: 20px; /* 전체적인 페이지 여백 */
+    box-sizing: border-box; /* 패딩과 테두리 포함 너비 계산 */
+}
+
+/* "인기순위" 섹션과 아래 컨테이너 간의 간격 추가 */
+.section {
+    margin-bottom: 20px; /* 아래 요소와 간격 추가 */
+    margin-top: 40px;
+    color: white;
+}
+
+.section h2 {
+    margin-bottom: 20px; /* 제목과 목록 간 간격 */
+    margin-left: 40px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* 드라마 카드 간 간격 조정 */
+.drama-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* 드라마 카드 컨테이너와 간격 추가 */
+.app-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* 카드 간 간격 */
+    justify-content: center; /* 가운데 정렬 */
+    margin-top: 120px;
+}
+
+/* Swiper 슬라이드 내부 드라마 목록 스타일 */
+.swiper-container .swiper-wrapper {
+    padding: 0 40px; /* 양쪽 여백 추가 (화살표 버튼과 겹치지 않도록) */
+}
+
+/* Swiper 화살표 버튼 위치 */
+.swiper-button-prev, .swiper-button-next {
+    z-index: 10; /* 드라마 카드 위에 표시 */
+    color: white; /* 명확한 색상 */
+    top: 50%; /* 세로 중앙 정렬 */
+    transform: translateY(-50%); /* 정렬 보정 */
+}
+
+/* 메인 이미지 슬라이더 스타일 */
+.main-image-slider {
+    width: 100%;
+    height: 400px; /* 슬라이더 높이 고정 */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+    overflow: hidden; /* 이미지가 영역을 넘지 않도록 숨기기 */
+}
+
+.main-swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+.main-slide-image {
+    width: 100%;   /* 슬라이더 영역에 맞춰서 이미지 가로 크기 확장 */
+    height: 100%;  /* 슬라이더 영역에 맞춰서 이미지 세로 크기 확장 */
+    object-fit: fill;  /* 이미지가 영역에 맞게 비율 조정 없이 채우도록 */
+    border-radius: 10px; /* 모서리 둥글게 */
+}
+
+
+
+/* 드라마 카드 이미지 */
+.drama-container img, .rank-container img {
+    width: 200px; /* 원하는 고정 폭 */
+    height: 300px; /* 원하는 고정 높이 */
+    object-fit: cover; /* 이미지를 박스에 채우되 잘림 */
+    border-radius: 8px; /* 모서리를 둥글게 */
+    transition: transform 0.3s ease; /* 마우스 오버 애니메이션 효과 */
+}
+
+.drama-container img:hover, .rank-container img:hover {
+    transform: scale(1.05); /* 마우스 오버 시 확대 효과 */
+}
+
+/* 인기순위 번호 스타일 */
+.rank-number {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 2px 6px;
+    border-radius: 4px;
+    z-index: 1; /* 다른 요소 위에 표시 */
+    pointer-events: none; /* 마우스 이벤트 무시 */
+}

@@ -1,0 +1,15 @@
+{
+  "email": "Email",
+  "password": "Mật khẩu",
+  "confirmPassword": "Xác nhận mật khẩu",
+  "signUp": "Đăng ký",
+  "signingUp": "Đang đăng ký...",
+  "validation": {
+    "emailRequired": "Vui lòng nhập email.",
+    "emailInvalid": "Vui lòng nhập địa chỉ email hợp lệ.",
+    "passwordRequired": "Vui lòng nhập mật khẩu.",
+    "passwordLength": "Mật khẩu phải có ít nhất 6 ký tự.",
+    "confirmRequired": "Vui lòng xác nhận mật khẩu.",
+    "passwordsMatch": "Mật khẩu không khớp."
+  }
+}

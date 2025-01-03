@@ -1,0 +1,324 @@
+@import 'reset.css';
+
+body {
+  background-color: black;
+}
+
+.app-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.drama-container {
+  width: 250px;
+  margin: 16px;
+  color: white;
+  border-radius: 5px;
+  /*border: 1px solid red;*/
+}
+
+.drama-container img {
+  max-width: 100%;
+}
+
+.drama-info h4 {
+  margin: 0;
+}
+
+.root-wrap {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+.header-container {
+  background-color: rgba(3, 37, 65, 1);
+}
+
+.header-wrap {
+  height: 64px;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+}
+
+.header-left-wrap {
+  display: flex;
+}
+
+.header-left-wrap ul {
+  display: flex;
+}
+
+.header-left-wrap h1 {
+  color: white;
+  margin: 0;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.header-nav-item {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  margin-right: 480px;
+  font-style: bold;
+}
+
+
+
+
+
+.navbar {
+  width:100%;
+  background-color: black;
+  padding: 15px 0px;
+  text-align: right;
+}
+
+
+
+
+
+/*Header*/
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #000;
+  color: #fff;
+}
+
+.logo {
+  color: #1e90ff;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.search-bar {
+  padding: 5px;
+  border-radius: 15px;
+  border: none;
+  width: 200px;
+  margin-right: auto;
+  margin-left: 20px;
+}
+
+.navbar {
+  display: flex;
+  gap: 15px;
+}
+
+.navbarMenu {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.navbarMenu:hover {
+  color: #1e90ff;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.language {
+  color: #fff;
+  font-size: 16px;
+}
+
+.user-icon {
+  font-size: 16px;
+}
+
+
+
+
+.auth-logo {
+  font-size: 36px;
+  color: #1e90ff;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  gap: 15px;
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.password-container {
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  flex: 1;
+}
+
+.show-password-btn {
+  font-size: 12px;
+  color: #999;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.auth-button {
+  background-color: #1e90ff;
+  color: #fff;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.auth-links {
+  font-size: 12px;
+  color: #999;
+  text-align: center;
+}
+
+.auth-links u {
+  text-decoration: none;
+}
+
+
+/* 버튼 스타일 */
+.ott-button {
+  background: #3a6cff; /* 버튼 배경색 */
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.ott-button:hover {
+  background: #2a54cc; /* 버튼 호버 효과 */
+}
+
+
+.reviews-section {
+  margin-top: 30px;
+}
+
+.review {
+  background-color: #333;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.review h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.add-review {
+  margin-top: 20px;
+}
+
+.add-review textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.add-review button {
+  background-color: #1e90ff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.drama-info p {
+  line-height: 150%;
+}
+
+
+
+/* 공통 스타일 */
+.edit-button {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.edit-button:hover {
+  transform: scale(1.2); /* 크기 확대 */
+}
+
+.tab {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.tab:hover {
+  color: #1e90ff; /* 호버 시 색상 변경 */
+  text-decoration: underline;
+}
+
+/* 반응형 */
+@media screen and (max-width: 768px) {
+  .mypage {
+      padding: 10px;
+  }
+
+  .profile-section {
+      flex-direction: column;
+      text-align: center;
+  }
+}
+
+
+/* 출연진 호버 색? */
+a {
+  color: inherit; /* 부모 요소의 텍스트 색상을 따르도록 설정 */
+  text-decoration: none; /* 밑줄 제거 */
+}
+
+a:visited {
+  color: inherit; /* 방문한 링크 색상 제거 */
+}
+
+a:hover {
+  color: inherit; /* 호버 시에도 색상 유지 */
+  text-decoration: none; /* 호버 시 밑줄 제거 */
+}
+
+a:active {
+  color: inherit; /* 클릭 중인 링크 색상 제거 */
+}

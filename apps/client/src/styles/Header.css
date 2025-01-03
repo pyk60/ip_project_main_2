@@ -1,0 +1,138 @@
+/* Header 컴포넌트 스타일 */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 양쪽 정렬 */
+  padding: 20px;
+  background-color: #000;
+  color: #fff;
+  position: relative;
+  flex-wrap: wrap; /* 화면이 작아질 때 요소들이 줄어들 수 있게 설정 */
+  z-index: 5; /* 헤더가 다른 요소 위에 표시되도록 설정 */
+}
+
+/* 로고는 헤더 중앙에 배치 */
+.logo {
+  color: #1e90ff;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  position: absolute; /* 로고를 중앙 정렬 위해 absolute 사용 */
+  left: 50%;
+  transform: translateX(-50%); /* X축 기준으로 정확히 중앙 정렬 */
+  text-align: center;
+  z-index: 2;
+}
+
+/* 왼쪽: 마이페이지와 커뮤니티 */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-grow: 1; /* 왼쪽 영역이 필요한 공간을 차지하도록 설정 */
+}
+
+/* 오른쪽: 검색창과 언어 */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap; /* 화면 크기 줄어들면 내용이 줄어들도록 설정 */
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  flex-shrink: 1; /* 오른쪽 영역이 공간이 부족할 때 줄어들도록 설정 */
+}
+
+/* 마이페이지와 커뮤니티 버튼 */
+.user-icon,
+.community {
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto; /* 클릭 가능하도록 설정 */
+  z-index: 3; /* 로고보다 위에 표시 */
+}
+
+/* 검색창 스타일 */
+.search-bar {
+  padding: 5px;
+  border-radius: 15px;
+  border: none;
+  width: 150px; /* 작은 화면에서 크기 조정 */
+  margin-right: 10px;
+}
+
+/* 언어 선택 드롭다운 */
+.language-selector {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+  position: relative; /* 드롭다운 메뉴의 상대적 위치를 설정 */
+}
+
+/* 언어 선택 버튼 */
+.language {
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+/* 호버 시 색상 변화 */
+.language:hover {
+  color: #007bff;
+}
+
+.dropdown {
+  position: absolute;
+  top: 30px; /* 버튼 바로 아래에 드롭다운 배치 */
+  left: 0;
+  background-color: black;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 80px;
+  z-index: 4; /* 드롭다운이 다른 요소 위에 표시되도록 설정 */
+  overflow: hidden; /* 드롭다운 내부 내용 잘리지 않게 설정 */
+}
+
+.dropdown-item {
+  padding: 8px;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  color: #fff;
+}
+
+.dropdown-item:hover {
+  background-color: #1e90ff; /* 호버 시 배경색 변경 */
+}
+
+/* 미디어 쿼리로 작은 화면 대응 */
+@media screen and (max-width: 768px) {
+  /* 화면 크기가 768px 이하일 때 스타일 */
+  .nav-right {
+    flex-direction: column; /* 요소를 세로로 쌓기 */
+    gap: 10px; /* 세로로 쌓인 요소들 간의 간격 */
+    align-items: flex-start; /* 왼쪽 정렬 */
+  }
+
+  .search-bar {
+    width: 100%; /* 화면이 좁을 때 검색창을 전체 너비로 확장 */
+    margin: 0; /* 마진 초기화 */
+  }
+
+  .language-selector {
+    margin-left: 0; /* 언어 선택 드롭다운의 여백 제거 */
+  }
+
+  .dropdown {
+    width: 100px; /* 작은 화면에서 드롭다운 너비 확대 */
+    left: auto; /* 기본 위치 초기화 */
+    right: 0; /* 오른쪽 기준 정렬 */
+  }
+
+  .logo {
+    font-size: 20px; /* 화면이 작아지면 로고 크기 조정 */
+    margin: 0 auto;
+  }
+}

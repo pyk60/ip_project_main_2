@@ -1,0 +1,214 @@
+/* Community.css */
+.community-container {
+    background-color: black;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.post {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: black;
+    color: white;
+}
+
+.channel-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.channel-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.channel-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.follow-btn {
+    background-color: transparent;
+    border: 1px solid #666;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.content-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.content-text {
+    margin: 10px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.interaction-counts {
+    display: flex;
+    gap: 15px;
+    padding: 10px 0;
+    color: #888;
+}
+
+.comment-count,
+.like-count {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.post-create-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #4B50E6;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.post-create-btn:hover {
+    transform: scale(1.1);
+}
+
+/* 모달 스타일 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    max-height: 80vh; /* 화면 크기에 맞게 모달 크기 제한 */
+    overflow-y: auto; /* 내용이 넘치면 스크롤 */
+    background-color: white;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.control-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 4px 10px;
+    font-size: 16px;
+    color: #666;
+    transition: color 0.2s;
+}
+
+.control-btn:hover {
+    color: #333;
+}
+
+.modal-body {
+    padding: 10px;
+}
+
+.modal-input {
+    width: 95%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.modal-textarea {
+    width: 95%;
+    height: 300px;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    resize: none;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.modal-footer {
+    padding: 20px;
+    border-top: 1px solid #eee;
+    text-align: right;
+}
+
+.submit-btn {
+    background-color: #4B50E6;
+    color: white;
+    border: none;
+    padding: 8px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.submit-btn:hover {
+    background-color: #3f43cc;
+}
+
+::placeholder {
+    color: #999;
+}
+
+/* 툴바 스타일 */
+.toolbar-btn {
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    background: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.toolbar-btn:hover {
+    background-color: #f5f5f5;
+}
