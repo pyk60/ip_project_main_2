@@ -165,3 +165,49 @@
     }
   }
   
+  /* 부모 컨테이너 스타일 수정 */
+.content-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 왼쪽 정렬 */
+  padding-left: 20px; /* 왼쪽 여백 추가 */
+}
+
+/* 게시물 컨테이너 스타일 */
+.posts {
+  width: 100%; /* 전체 너비 사용 */
+  margin-top: 20px;
+}
+
+.post-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 왼쪽 정렬 */
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.channel-name {
+  font-weight: bold;
+  margin-bottom: 5px; /* 이름과 내용 간격 */
+}
+
+.post-content {
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+  margin-left: 0; /* 추가 여백 제거 */
+}
+
+
+/* 각 리뷰 스타일 */
+.review {
+  border-radius: 8px; /* 모서리 둥글게 */
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9; /* 배경색 */
+  width: 95%; /* 부모 컨테이너의 95% */
+  max-width: 1400px; /* 최대 가로 길이를 1400px로 늘림 */
+
+  margin-left: auto;
+  margin-right: auto; /* 가운데 정렬 */
+}
+

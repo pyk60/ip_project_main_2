@@ -1,0 +1,31 @@
+.search-results {
+    padding: 20px;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.result-card {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.result-card:hover {
+    transform: scale(1.05);
+}
+
+.result-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.result-title {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}

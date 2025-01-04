@@ -7,6 +7,8 @@ import 'swiper/css/navigation';
 import axios from "axios";
 import YouTube from "react-youtube"; // YouTube 트레일러 표시
 import '../styles/Detail.css'
+import { useFavoriteContext } from "../context/FavoriteContext";
+import { useReviewContext } from "../context/ReviewContext";
 
 const API_KEY = "d935fbb42d754c0a19e3c947ea1e3a93";
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -25,11 +27,23 @@ export default function Detail() {
     const [ottProviders, setOTTProviders] = useState([]); // OTT 제공자 상태
     const [isFavorite, setIsFavorite] = useState(false); // 찜 상태 관리
     const playerRef = useRef(null); // 유튜브 플레이어 레퍼런스
+    const { addFavorite, removeFavorite } = useFavoriteContext();
+    const { addReview } = useReviewContext();
+
 
     const toggleFavorite = () => {
-        setIsFavorite((prev) => !prev); // 상태를 토글
+        setIsFavorite((prev) => !prev);
+    
+        if (!isFavorite) {
+            addFavorite({
+                id: details.id,
+                title: details.name || details.original_name || "제목 없음",
+                poster: `${IMG_BASE_URL}${details.poster_path}`,
+            });
+        } else {
+            removeFavorite(details.id);
+        }
     };
-
 
     const fetchOTTProviders = async (id) => {
         try {
@@ -194,7 +208,9 @@ export default function Detail() {
             author: "익명",
             content: newReview.content,
             rating: newReview.rating,
+            dramaTitle: details?.name || details?.original_name || "제목 없음"
         };
+        addReview(newReviewObj);
         setReviews((prev) => [...prev, newReviewObj]);
         setNewReview({ content: "", rating: 0, hoverRating: 0 }); // 입력 필드 초기화
     };

@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import "../styles/Community.css";
 import { useFollow } from "./FollowContext";
-
+import { usePostsContext } from "../context/PostContext";
 
 function Community() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [posts, setPosts] = useState([
+    const [post, setPosts] = useState([ // 기존 게시물은 초기 상태로 유지
         {
             id: 1,
             channelName: "Channel Name",
             avatar: "../img/default-avatar.jpg",
-            contentText: "아니 노란 우산 쓰고 달려오던 임솔 보고 첫눈에 반했던 류선재가 사라졌는데 진짜 어떡하지 이건아니지예.. 오천만 수범이들이 꼽는 선업튀 엔딩 top1이 사라졌다고 지금",
+            contentText:
+                "아니 노란 우산 쓰고 달려오던 임솔 보고 첫눈에 반했던 류선재가 사라졌는데 진짜 어떡하지 이건아니지예.. 오천만 수범이들이 꼽는 선업튀 엔딩 top1이 사라졌다고 지금",
             likeCount: 5,
             commentCount: 28,
             comments: [],
@@ -21,10 +22,11 @@ function Community() {
     const [newImage, setNewImage] = useState(null); // 새 이미지 상태 추가
     const [imagePreview, setImagePreview] = useState(null); // 이미지 미리보기 상태 추가
 
+    const { addFollowing } = useFollow();
+    const { posts: contextPosts, addPost } = usePostsContext(); // Context에서 posts와 addPost 가져오기
+
     const handleOpenModal = () => setIsModalOpen(true);
     const handleCloseModal = () => setIsModalOpen(false);
-
-    const { addFollowing } = useFollow();
 
     const handleFollow = () => {
         addFollowing({ name: "Channel Name", avatar: require("../img/default-avatar.jpg") });
@@ -32,21 +34,21 @@ function Community() {
 
     // 좋아요 클릭 시 숫자 증가
     const handleLike = (postId) => {
-        setPosts(posts.map(post =>
+        setPosts(post.map(post =>
             post.id === postId ? { ...post, likeCount: post.likeCount + 1 } : post
         ));
     };
 
     // 댓글 입력 토글
     const handleCommentInputToggle = (postId) => {
-        setPosts(posts.map(post =>
+        setPosts(post.map(post =>
             post.id === postId ? { ...post, showCommentInput: !post.showCommentInput } : post
         ));
     };
 
     // 댓글 추가
     const handleAddComment = (postId, comment) => {
-        setPosts(posts.map(post =>
+        setPosts(post.map(post =>
             post.id === postId
                 ? {
                       ...post,
@@ -60,6 +62,7 @@ function Community() {
                 : post
         ));
     };
+    
 
     // 이미지 파일 선택 시 처리
     const handleImageChange = (event) => {
@@ -76,19 +79,24 @@ function Community() {
 
     // 새 글 추가
     const handlePostSubmit = () => {
-        setPosts([
-            ...posts,
-            {
-                id: posts.length + 1,
-                channelName: "New Channel Name",
-                avatar: require("../img/default-avatar.jpg"),
-                contentText: newPost.content,
-                likeCount: 0,
-                commentCount: 0,
-                comments: [],
-                image: newImage ? URL.createObjectURL(newImage) : null, // 새 이미지가 없을 경우 null로 설정
-            },
-        ]);
+        const contentText = newPost.content || ""; // newPost.content를 참조
+        if (!contentText.trim()) {
+            alert("내용을 입력하세요.");
+            return;
+        }
+
+        const newPostData = {
+            id: Date.now(),
+            channelName: "New Channel Name",
+            avatar: require("../img/default-avatar.jpg"),
+            contentText: contentText, // contentText 사용
+            likeCount: 0,
+            commentCount: 0,
+            comments: [],
+            image: newImage ? URL.createObjectURL(newImage) : null, // 새 이미지가 없을 경우 null로 설정
+        };
+
+        addPost(newPostData); // Context에 새 게시물 추가
         setNewPost({ title: "", content: "" }); // 입력창 초기화
         setNewImage(null); // 이미지 초기화
         setImagePreview(null); // 미리보기 초기화
@@ -97,7 +105,7 @@ function Community() {
 
     return (
         <div className="community-container">
-            {posts.map((post) => (
+            {[...post, ...contextPosts].map((post) => ( // 기존 게시물과 새 게시물 병합
                 <div className="post" key={post.id}>
                     <div className="channel-info">
                         <div className="channel-profile">
@@ -125,8 +133,8 @@ function Community() {
                         <p className="content-text">{post.contentText}</p>
                     </div>
 
-                    {/* 좋아요/댓글 카운트 */}
-                    <div className="interaction-counts">
+                     {/* 좋아요/댓글 카운트 */}
+                     <div className="interaction-counts">
                         <span className="like-count" onClick={() => handleLike(post.id)}>
                             ❤️ {post.likeCount}
                         </span>
@@ -136,29 +144,6 @@ function Community() {
                         >
                             💬 {post.commentCount}
                         </span>
-                    </div>
-
-                    {/* 댓글 입력/댓글 리스트 */}
-                    {post.showCommentInput && (
-                        <div className="comment-input">
-                            <input
-                                type="text"
-                                placeholder="댓글을 입력하세요"
-                                onKeyDown={(e) => {
-                                    if (e.key === 'Enter' && e.target.value.trim()) {
-                                        handleAddComment(post.id, e.target.value.trim());
-                                        e.target.value = '';
-                                    }
-                                }}
-                            />
-                        </div>
-                    )}
-                    <div className="comments-list">
-                        {post.comments.map((comment, index) => (
-                            <div key={index} className="comment">
-                                <strong>{comment.username}: </strong>{comment.text}
-                            </div>
-                        ))}
                     </div>
                 </div>
             ))}

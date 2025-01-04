@@ -98,3 +98,38 @@ body {
     z-index: 1; /* 다른 요소 위에 표시 */
     pointer-events: none; /* 마우스 이벤트 무시 */
 }
+
+/* 추천 드라마 섹션 스타일 */
+.recommendation-section {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8); /* 어두운 배경 */
+    border-radius: 10px; /* 둥근 모서리 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* 그림자 효과 */
+    color: white; /* 텍스트 색상 */
+}
+
+/* 추천 드라마 제목 스타일 */
+.recommendation-section h2 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* 공통 스타일: 드라마 카드 리스트 */
+.recommendation-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* 카드 간 간격 */
+    justify-content: center; /* 가운데 정렬 */
+    margin-top: 40px; /* 추천 섹션 여백 */
+}
+
+/* 추천 없음 메시지 */
+.no-recommendation {
+    font-size: 18px;
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+}
