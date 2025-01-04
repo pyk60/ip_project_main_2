@@ -27,14 +27,15 @@ export default function Detail() {
     const [ottProviders, setOTTProviders] = useState([]); // OTT 제공자 상태
     const [isFavorite, setIsFavorite] = useState(false); // 찜 상태 관리
     const playerRef = useRef(null); // 유튜브 플레이어 레퍼런스
-    const { addFavorite, removeFavorite } = useFavoriteContext();
+    const { favorites, addFavorite, removeFavorite } = useFavoriteContext();
     const { addReview } = useReviewContext();
 
 
     const toggleFavorite = () => {
-        setIsFavorite((prev) => !prev);
+        const updatedFavoriteState = !isFavorite;
+        setIsFavorite(updatedFavoriteState);
     
-        if (!isFavorite) {
+        if (updatedFavoriteState) {
             addFavorite({
                 id: details.id,
                 title: details.name || details.original_name || "제목 없음",
@@ -44,6 +45,7 @@ export default function Detail() {
             removeFavorite(details.id);
         }
     };
+    
 
     const fetchOTTProviders = async (id) => {
         try {
@@ -60,6 +62,25 @@ export default function Detail() {
         } catch (error) {
             console.error("Error fetching OTT providers:", error);
             setOTTProviders([]); // 에러 발생 시 빈 데이터
+        }
+    };
+
+    const getStreamingUrl = (providerName, dramaId, dramaTitle) => {
+        const encodedTitle = encodeURIComponent(dramaTitle);
+        
+        switch(providerName.toLowerCase()) {
+            case 'netflix':
+                return `https://www.netflix.com/search?q=${dramaTitle}`;
+            case 'wavve':
+                return `https://www.wavve.com/search?searchWord=${dramaTitle}`;
+            case 'watcha':
+                return `https://watcha.com/search?query=${dramaTitle}`;
+            case 'coupang play':
+                return `https://www.coupangplay.com/query?src=${dramaTitle}`;
+            case 'netflix basic with ads':
+                return `https://www.netflix.com/search?q=${dramaTitle}`;
+            default:
+                return null;
         }
     };
     
@@ -195,11 +216,17 @@ export default function Detail() {
 
     // 컴포넌트 마운트 시 데이터 가져오기
     useEffect(() => {
-        fetchAllData();
-        fetchOTTProviders(state.id);
-        window.scrollTo(0, 0);
-    }, [state.id]);
-
+        if (state?.id) {
+            fetchAllData();
+            fetchOTTProviders(state.id);
+            window.scrollTo(0, 0);
+    
+            // Context 상태에 따른 초기 찜 상태 설정
+            setIsFavorite(favorites.some((item) => item.id === state.id));
+        }
+    }, [state?.id, favorites]);
+    
+    
     // 새 리뷰 추가
     const handleAddReview = () => {
         if (newReview.content.trim() === "" || newReview.rating === 0) return; // 내용과 별점이 모두 입력되어야 함
@@ -285,14 +312,18 @@ export default function Detail() {
                         ottProviders.map((provider, index) => (
                             <div key={index} className="ott-item">
                                 <div className="ott-info">
-                                    <p>{provider.provider_name}</p> {/* TMDB에서 제공하는 플랫폼 이름 */}
+                                    <p>{provider.provider_name}</p>
                                 </div>
-                                <button
-                                    className="ott-button"
-                                    onClick={() => window.open(provider.link, "_blank")}
-                                >
-                                    보러가기
-                                </button>
+                                {getStreamingUrl(provider.provider_name, details.id, details.name) && (
+                                    <a 
+                                        href={getStreamingUrl(provider.provider_name, details.id, details.name)}
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="ott-button"
+                                    >
+                                        보러가기
+                                    </a>
+                                )}
                             </div>
                         ))
                     ) : (

@@ -5,22 +5,24 @@ import { usePostsContext } from "../context/PostContext";
 
 function Community() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [post, setPosts] = useState([ // 기존 게시물은 초기 상태로 유지
+    const [posts, setPosts] = useState([
         {
             id: 1,
             channelName: "Channel Name",
             avatar: "../img/default-avatar.jpg",
-            contentText:
-                "아니 노란 우산 쓰고 달려오던 임솔 보고 첫눈에 반했던 류선재가 사라졌는데 진짜 어떡하지 이건아니지예.. 오천만 수범이들이 꼽는 선업튀 엔딩 top1이 사라졌다고 지금",
+            contentText: "아니 노란 우산 쓰고 달려오던 임솔...",
             likeCount: 5,
             commentCount: 28,
             comments: [],
-            image: require("../img/post-image.png"), // 기존 게시물 이미지
+            image: require("../img/post-image.png"),
+            isFollowed: false,
         },
     ]);
     const [newPost, setNewPost] = useState({ title: "", content: "" });
     const [newImage, setNewImage] = useState(null); // 새 이미지 상태 추가
     const [imagePreview, setImagePreview] = useState(null); // 이미지 미리보기 상태 추가
+    const [isFollowed, setIsFollowed] = useState(false);
+    const { followingList } = useFollow();
 
     const { addFollowing } = useFollow();
     const { posts: contextPosts, addPost } = usePostsContext(); // Context에서 posts와 addPost 가져오기
@@ -28,40 +30,63 @@ function Community() {
     const handleOpenModal = () => setIsModalOpen(true);
     const handleCloseModal = () => setIsModalOpen(false);
 
-    const handleFollow = () => {
-        addFollowing({ name: "Channel Name", avatar: require("../img/default-avatar.jpg") });
+    const handleFollow = (postId, user) => {
+        setPosts((prevPosts) =>
+            prevPosts.map((post) =>
+                post.id === postId
+                    ? { ...post, isFollowed: !post.isFollowed }
+                    : post
+            )
+        );
+    
+        // 중복 방지: 이미 팔로우된 사용자인지 확인 후 추가
+        if (!followingList.some((item) => item.name === user.name)) {
+            addFollowing(user); // 올바르게 사용자 정보 추가
+        }
     };
-
+    
+    
     // 좋아요 클릭 시 숫자 증가
     const handleLike = (postId) => {
-        setPosts(post.map(post =>
-            post.id === postId ? { ...post, likeCount: post.likeCount + 1 } : post
-        ));
+        setPosts((prevPosts) =>
+            prevPosts.map((post) =>
+                post.id === postId ? { ...post, likeCount: post.likeCount + 1 } : post
+            )
+        );
     };
+    
 
     // 댓글 입력 토글
     const handleCommentInputToggle = (postId) => {
-        setPosts(post.map(post =>
-            post.id === postId ? { ...post, showCommentInput: !post.showCommentInput } : post
-        ));
+        setPosts((prevPosts) =>
+            prevPosts.map((post) =>
+                post.id === postId
+                    ? { ...post, showCommentInput: !post.showCommentInput }
+                    : post
+            )
+        );
     };
+    
+    
 
     // 댓글 추가
-    const handleAddComment = (postId, comment) => {
-        setPosts(post.map(post =>
-            post.id === postId
-                ? {
-                      ...post,
-                      comments: [
-                          ...post.comments,
-                          { username: "사용자 이름", text: comment },
-                      ],
-                      commentCount: post.commentCount + 1,
-                      showCommentInput: false, // 댓글 추가 후 입력 창 닫기
-                  }
-                : post
-        ));
+    const handleAddComment = (postId, commentText) => {
+        if (!commentText.trim()) return; // 빈 댓글 방지
+    
+        setPosts((prevPosts) =>
+            prevPosts.map((post) =>
+                post.id === postId
+                    ? {
+                          ...post,
+                          comments: [...post.comments, { username: "익명", text: commentText }],
+                          commentCount: post.commentCount + 1,
+                      }
+                    : post
+            )
+        );
     };
+    
+    
     
 
     // 이미지 파일 선택 시 처리
@@ -105,7 +130,7 @@ function Community() {
 
     return (
         <div className="community-container">
-            {[...post, ...contextPosts].map((post) => ( // 기존 게시물과 새 게시물 병합
+            {[...posts, ...contextPosts].map((post) => ( // 기존 게시물과 새 게시물 병합
                 <div className="post" key={post.id}>
                     <div className="channel-info">
                         <div className="channel-profile">
@@ -116,8 +141,16 @@ function Community() {
                             />
                             <span className="channel-name">{post.channelName}</span>
                         </div>
-                        <button className="follow-btn" onClick={handleFollow}>
-                            follow
+                        <button
+                            className={`follow-btn ${post.isFollowed ? "followed" : ""}`}
+                            onClick={() =>
+                                handleFollow(post.id, {
+                                    name: post.channelName,
+                                    avatar: post.avatar || "https://via.placeholder.com/100", // 기본값 설정
+                                })
+                            }
+                        >
+                            {post.isFollowed ? "Unfollow" : "Follow"}
                         </button>
                     </div>
 
@@ -138,13 +171,37 @@ function Community() {
                         <span className="like-count" onClick={() => handleLike(post.id)}>
                             ❤️ {post.likeCount}
                         </span>
-                        <span
-                            className="comment-count"
-                            onClick={() => handleCommentInputToggle(post.id)}
-                        >
+                        <span className="comment-count" onClick={() => handleCommentInputToggle(post.id)}>
                             💬 {post.commentCount}
                         </span>
                     </div>
+
+                    <div className="comments-section">
+                        {post.showCommentInput && (
+                            <div className="comment-input">
+                                <textarea
+                                    className="comment-textarea"
+                                    placeholder="댓글을 입력하세요..."
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter" && e.target.value.trim()) {
+                                            handleAddComment(post.id, e.target.value.trim());
+                                            e.target.value = ""; // 입력창 초기화
+                                        }
+                                    }}
+                                />
+                            </div>
+                        )}
+
+                        <div className="comments-list">
+                            {post.comments.map((comment, index) => (
+                                <div key={index} className="comment-item">
+                                    <strong>{comment.username}:</strong> {comment.text}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+
                 </div>
             ))}
 

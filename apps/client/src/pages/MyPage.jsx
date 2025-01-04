@@ -4,6 +4,7 @@ import { usePostsContext } from "../context/PostContext";
 import { useReviewContext } from "../context/ReviewContext";
 import { useFavoriteContext } from "../context/FavoriteContext";
 import { useNavigate } from "react-router-dom";
+import { useFollow } from "./FollowContext";
 
 export default function MyPage({ profile }) {
     const [activeTab, setActiveTab] = useState("게시물");
@@ -11,10 +12,10 @@ export default function MyPage({ profile }) {
     const { reviews } = useReviewContext();
     const { favorites } = useFavoriteContext();
     const navigate = useNavigate();
+    const { followingList } = useFollow(); // FollowContext에서 followingList 가져오기
 
     const [showFollowingList, setShowFollowingList] = useState(false);
-    const [followingList, setFollowingList] = useState([]); // 초기값 빈 배열
-    const [followersList, setFollowersList] = useState([]); // 초기값 빈
+    const [followersList, setFollowersList] = useState([]); // 초기값 빈 배열
 
     // 기본값 설정
     const dummyDramas = [
@@ -92,13 +93,15 @@ export default function MyPage({ profile }) {
             </div>
 
             {/* 팔로우 목록 */}
-            {showFollowingList && (
+            {showFollowingList && ( // 클릭 시 목록 표시
                 <div className="following-list">
                     <h3>팔로우한 사용자</h3>
                     {followingList.length > 0 ? (
                         <ul>
                             {followingList.map((user, index) => (
-                                <li key={index}>{user.name}</li>
+                                <li key={index} className="following-item">
+                                    <span>{user.name || "Unknown User"}</span>
+                                </li>
                             ))}
                         </ul>
                     ) : (
@@ -107,29 +110,32 @@ export default function MyPage({ profile }) {
                 </div>
             )}
 
+
             {/* 콘텐츠 섹션 */}
             <div className="content-section">
                 {/* 찜 탭 */}
                 {activeTab === "찜" && (
-                <div className="wishlist">
-                    <h3>찜한 드라마</h3>
-                    <div className="drama-list">
-                        {favorites.length > 0 ? (
-                            favorites.map((drama) => (
-                                <div key={drama.id} className="drama-item">
-                                    <img
-                                        src={drama.poster}
-                                        alt={drama.title}
-                                    />
-                                    <p>{drama.title}</p>
-                                </div>
-                            ))
-                        ) : (
-                            <p>찜한 드라마가 없습니다.</p>
-                        )}
+                    <div className="wishlist">
+                        <h3>찜한 드라마</h3>
+                        <div className="drama-list">
+                            {favorites.length > 0 ? (
+                                favorites.map((drama) => (
+                                    <div key={drama.id} className="drama-item">
+                                        <img
+                                            src={drama.poster}
+                                            alt={drama.title}
+                                            className="drama-poster"
+                                        />
+                                        <p>{drama.title}</p>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>찜한 드라마가 없습니다.</p>
+                            )}
+                        </div>
                     </div>
-                </div>
                 )}
+
 
                 {/* 게시물 탭 */}
                 {activeTab === "게시물" && (
