@@ -6,3 +6,4 @@ dist
 venv/
 mylogs.json
 .codegpt
+.vercel
