@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
+import { useTranslation } from "react-i18next";
 
 function Login({ login }) {
     const [id, setId] = useState('');
     const [pw, setPw] = useState('');
     const navigate = useNavigate();
+    const { t } = useTranslation('login');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -20,7 +22,7 @@ function Login({ login }) {
         <div className="auth-container">
             <h1 className="auth-logo">DramaSphere</h1>
             <form className="auth-form" onSubmit={handleSubmit}>
-                <label htmlFor="id">아이디</label>
+                <label htmlFor="id">{t('email')}</label>
                 <input
                     value={id}
                     onChange={(e) => setId(e.target.value)}
@@ -29,7 +31,7 @@ function Login({ login }) {
                     placeholder="Email or phone number"
                 />
 
-                <label htmlFor="pw">비밀번호</label>
+                <label htmlFor="pw">{t('password')}</label>
                 <div className="password-container">
                     <input
                         value={pw}
@@ -50,15 +52,15 @@ function Login({ login }) {
                     </button>
                 </div>
 
-                <button type="submit" className="auth-button">로그인</button>
+                <button type="submit" className="auth-button">{t('login')}</button>
 
                 <div className="auth-links">
-                    <span>아직 회원이 아니에요. </span>
+                    <span>{t('signUpMessage')}</span>
                     <u
                         onClick={() => navigate('/signup')}
                         style={{ cursor: 'pointer', color: '#1e90ff' }}
                     >
-                        회원가입하기.
+                        {t('signUpButton')}
                     </u>
                 </div>
             </form>

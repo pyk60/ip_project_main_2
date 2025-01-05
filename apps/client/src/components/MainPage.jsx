@@ -13,7 +13,7 @@ const API_KEY = "d935fbb42d754c0a19e3c947ea1e3a93";
 const BASE_URL = "https://api.themoviedb.org/3";
 
 export default function MainPage() {
-    const { t } = useTranslation(); // 번역 함수 가져오기
+    const { t, i18n } = useTranslation('mainpage'); // 번역 함수 가져오기
     const [dramas, setDramas] = useState([]);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
@@ -22,7 +22,8 @@ export default function MainPage() {
     const [recommendedDramas, setRecommendedDramas] = useState([]);
     const [selectedDrama, setSelectedDrama] = useState(null);
     const [popularDramas, setPopularDramas] = useState([]); // 인기 드라마 상태
-
+    
+    
 
     // 중복 제거 함수
     const removeDuplicates = (dramas) => {

@@ -1,0 +1,7 @@
+{
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "signUpMessage": "I'm not a member yet.",
+    "signUpButton": "Sign up for membership"
+}
